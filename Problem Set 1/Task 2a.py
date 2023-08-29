@@ -8,6 +8,7 @@ f_1 = 5.0            # Normalized frequency
 F_s = 6000.0         # Sampling rate (samples per second)
 duration = 4.0       # Duration of the sequence in seconds
 samples = F_s*duration
+
 # Generate time values using np.linspace()
 n = np.linspace(0, duration, int(samples), endpoint=False)
 
@@ -22,5 +23,3 @@ plt.xlabel("Time (seconds)")
 plt.ylabel("Amplitude")
 # plt.grid(True)
 plt.show()
-
-

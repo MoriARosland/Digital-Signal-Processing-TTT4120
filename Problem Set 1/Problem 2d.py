@@ -1,14 +1,13 @@
 import numpy as np
 import sounddevice as sd
 
-# Parameters
 F_s = 8000                  # Sampling rate (samples per second)
 F_1 = [1000, 3000, 6000]    # Physical Frequency
 duration = 4.0              # Duration of the sequence in seconds
 
 numberOfSamples = F_s*duration
 
-# Playback signal at all sampling rates.
+# Plays back signal at all sampling rates:
 for F_1 in F_1:
 
     # Generate time values using np.linspace()

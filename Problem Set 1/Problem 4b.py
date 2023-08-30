@@ -27,6 +27,6 @@ axs[1].stem(index_y_2, y_2, basefmt='r--', markerfmt='ro', linefmt='r-')
 axs[1].set_title('System 2 Out: y_2[n]')
 
 axs[0].set(xlabel='Index [n]', ylabel='y_1[n]')
-axs[1].set(xlabel='Index [n]', ylabel='y_2-[n]')
+axs[1].set(xlabel='Index [n]', ylabel='y_2[n]')
 
 plt.show()

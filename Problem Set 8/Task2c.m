@@ -1,21 +1,33 @@
-sequence_length = 1000;
+autocorrelation_xx = [1.16, -0.4, 0, 0]; % 1-indexed
 
-random_noise = randn(1,sequence_length);
+matrix1 = [autocorrelation_xx(1)];
 
-x = random_noise-0.4*random_noise;
+matrix2 = [autocorrelation_xx(1), autocorrelation_xx(2); autocorrelation_xx(2), autocorrelation_xx(1)];
 
-% Order of AR-Process:
-p1 = 1;
-p2 = 2;
-p3 = 3;
+matrix3 = [autocorrelation_xx(1), autocorrelation_xx(2), autocorrelation_xx(3);
+           autocorrelation_xx(2), autocorrelation_xx(1), autocorrelation_xx(2);
+           autocorrelation_xx(3), autocorrelation_xx(2), autocorrelation_xx(1)];
 
-[ar_coeff_p1, error_var1] = aryule(x,p1);
-[ar_coeff_p2, error_var2] = aryule(x,p2);
-[ar_coeff_p3, error_var3] = aryule(x,p3);
 
-disp(['First-order coefficients: ', num2str(ar_coeff_p1)]);
-disp(['First-order sigma^2: ', num2str(error_var1)]);
-disp(['Second-order coefficients: ', num2str(ar_coeff_p2)]);
-disp(['Second-order sigma^2: ', num2str(error_var2)]);
-disp(['Third-order coefficients: ', num2str(ar_coeff_p3)]);
-disp(['Third-order sigma^2: ', num2str(error_var3)]);
+% Optimal first-order predictors:
+a1 = -inv(matrix1)*autocorrelation_xx(2);
+var1 = (1*1.16)+(a1*(-0.4));
+disp(['First-order coefficients: ', num2str(a1)])
+disp(['First-order variance: ', num2str(var1)])
+
+% Optimal second-order predictors:
+a2 = -inv(matrix2)*[autocorrelation_xx(2), autocorrelation_xx(3)]';
+var2 = sum([1 a2'].*autocorrelation_xx(1:3));
+disp(['Second-order coefficients: ', num2str(a2')])
+disp(['Second-order variance: ', num2str(var2)])
+
+% Optimal third-order predictors:
+a3 = -inv(matrix3)*[autocorrelation_xx(2), autocorrelation_xx(3), autocorrelation_xx(4)]';
+var3 = sum([1 a3'].*autocorrelation_xx(1:4));
+disp(['Third-order coefficients: ', num2str(a3')])
+disp(['Third-order variance: ', num2str(var3)])
+
+
+
+
+

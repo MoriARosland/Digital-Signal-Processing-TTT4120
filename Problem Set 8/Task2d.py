@@ -39,7 +39,7 @@ h1 = np.zeros(len(f))
 for i in range(len(f)):
     sum = (X1) * np.e**(-1j*2*np.pi*f[i])
     h1[i] = np.abs((1+sum))**2
-Rff1 = variance1 / h1
+PDS1 = variance1 / h1
 
 # Second order
 h2 = np.zeros(len(f))
@@ -47,7 +47,7 @@ for i in range(len(f)):
     sum = (X2[0]) * np.e**(-1j*2*np.pi*f[i]) + \
         (X2[1]) * np.e**(-1j*2*np.pi*f[i]*2)
     h2[i] = np.abs((1+sum))**2
-Rff2 = variance2 / h2
+PDS2 = variance2 / h2
 
 # Third order
 h3 = np.zeros(len(f))
@@ -55,7 +55,7 @@ for i in range(len(f)):
     sum = (X3[0]) * np.e**(-1j*2*np.pi*f[i]) + (X3[1]) * \
         np.e**(-1j*2*np.pi*f[i]*2) + (X3[2]) * np.e**(-1j*2*np.pi*f[i]*3)
     h2[i] = np.abs((1+sum))**2
-Rff3 = variance3 / h2
+PDS3 = variance3 / h2
 
 
 def plot_pds(Rff, order, ax):
@@ -70,9 +70,9 @@ def plot_pds(Rff, order, ax):
 # Create a single figure with three subplots
 fig, axes = plt.subplots(3, 1, figsize=(6, 12))
 
-plot_pds(Rff1, 1, axes[0])
-plot_pds(Rff2, 2, axes[1])
-plot_pds(Rff3, 3, axes[2])
+plot_pds(PDS1, 1, axes[0])
+plot_pds(PDS2, 2, axes[1])
+plot_pds(PDS3, 3, axes[2])
 
-plt.tight_layout()  # Ensures subplots don't overlap
+plt.tight_layout()  # Prevent subplots overlapping
 plt.show()
